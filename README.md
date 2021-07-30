@@ -39,7 +39,7 @@
   <h3 align="center">Advent of code 2020 day 5</h3>
 
   <p align="center">
-    Advent of Code day 5 this is a solution that I am devising using object script to solve a problem relating to a batch file and a selection of passport fields
+    Advent of Code 2020 day 5 this is a solution where the flight seating arrangements are in a binary format and we need to convert these in to find out what the highest seat ID is for the boarding pass.
     <br />
     <a href="https://github.com/sehinde-gb/flightseats"><strong>Explore the docs »</strong></a>
     <br />
@@ -156,7 +156,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@@thediversecoder](https://twitter.com/@thediversecoder) - ormrepo@gmail.com
+Your Name - [@thediversecoder](https://twitter.com/@thediversecoder) - ormrepo@gmail.com
 
 Project Link: [https://github.com/sehinde-gb/flightseats](https://github.com/sehinde-gb/flightseats)
 
