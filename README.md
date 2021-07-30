@@ -33,7 +33,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/sehinde-gb/flightseats">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Advent of code 2020 day 5</h3>
