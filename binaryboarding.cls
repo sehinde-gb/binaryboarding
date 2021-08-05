@@ -1,4 +1,4 @@
-Class New.Seats Extends %Persistent
+Class Binary.Boarding Extends %Persistent
 {
 
 ClassMethod Replacement()
