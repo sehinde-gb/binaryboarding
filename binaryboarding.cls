@@ -26,14 +26,16 @@ ClassMethod Replacement()
             write !,*32
             set row = $EXTRACT(line(i),1,7)
             set column = $EXTRACT(line(i),*-2,*)
-            write "Row:", row ,!
+            write "Row:", row,!
             write "Column:",column ,!
                 
-            do ##class(New.Seats).Conversion(.row,.column)  
+            do ##class(Binary.Boarding).Conversion(.row,.column)  
         }
         
         
         write !, "Ended replacement loop"
+        write *32
+        write !, "Binary boarding is now complete !."
 }
 
 ClassMethod Conversion(ByRef column As %Binary, ByRef row As %Binary)
@@ -45,41 +47,62 @@ ClassMethod Conversion(ByRef column As %Binary, ByRef row As %Binary)
     set Power = 1
     set i=1
     //set CNumber = column
-    set CNumber(i) = column
-    set RNumber(i) = row
+
+    set CNumber = column
+    set RNumber = row
     //set RNumber = row
-    write "Column Number:",CNumber(i) ,!
-    write "Row Number:",RNumber(i) ,!
+    
+    write "Column Number:",CNumber ,!
+    write "Row Number:",RNumber ,!
+    
+    
 
 /// set up a for loop to extract the column result and convert it in to decimalised format
 
-    set ColResult = ZCONVERT(ColResult)
-    set RowResult = ZCONVERT(RowResult)
-    write ColResult,!
-    write RowResult,!
-    
-    //for i=$LENGTH(CNumber):-1:1 {
-        //set ColResult = ColResult + ( $EXTRACT(CNumber(i))* Power )
-        //set Power = Power * 2
 
-        //}
-    //for i=$LENGTH(RNumber):-1:1 {
-        //set RowResult = RowResult + ( $EXTRACT(RNumber(i))* Power )
-        //set Power = Power * 2
-  //  }
-    //write "The column result is:",ColResult(i),!
-    //write "The row result is:",RowResult(i),!
+    set RowResult=0,Power=1
+
+    for i=$LENGTH(RNumber):-1:1 {
+        set RowResult = RowResult + ($EXTRACT(RNumber,i)* Power)
+        set Power = Power * 2
+    }
+
+    write "Row Result is:",RowResult ,!
+
+    set ColResult=0,Power=1
+    
+    for i=$LENGTH(CNumber):-1:1 {
+        set ColResult = ColResult + ($EXTRACT(CNumber,i)*Power)
+        set Power = Power * 2
+    }
+
+    write "Column Result is:",ColResult ,!
+    
+
 /// Calls the CalculateSeats method passing in the Column and Row results as parameters
-   // do ##class(New.Seats).CalculateSeats(.ColResult,.RowResult)
-    //set i = $INCREMENT(i)
+    do ##class(Binary.Boarding).CalculateSeats(.ColResult,.RowResult)
 }
 
 /// set up a for loop to extract the row result and convert it in to decimalised format
 ClassMethod CalculateSeats(ByRef RowResult As %Integer, ByRef ColResult As %Integer)
 {
+
+/// Initialise previous seat variable
+    set previousSeatID = ""
+    
 /// Calculate the seat ID based on the Row and Column result parameters
     set seatID = RowResult * 8 + ColResult
     write "SeatID:", seatID
+
+/// Check to see if there is a seat missing and if it is then we have identified our seat
+
+    if (previousSeatID '= "" && seatID '= previousSeatID + 1) {
+      return seatID - 1
+    }
+
+/// Assign the previous seat to the current seat ID and then write it out to the screen     
+    set previousSeatID = seatID
+    write previousSeatID ,!
 }
 
 Storage Default
