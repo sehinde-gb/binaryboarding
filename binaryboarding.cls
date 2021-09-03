@@ -1,7 +1,10 @@
 Class Binary.Boarding Extends %Persistent
 {
 
-ClassMethod Replacement()
+     Property line As %ArrayOfDataTypes;
+
+/// A method that loops through a line array and replaced the letters with binary digits
+ClassMethod Replacement(ByRef line As %ArrayOfDataTypes)
 {
         // We set up an array containing 3 binary lines
         set line(1) = "FFFFFBFLLR"
@@ -29,15 +32,16 @@ ClassMethod Replacement()
             write "Row:", row,!
             write "Column:",column ,!
                 
-            do ##class(Binary.Boarding).Conversion(.row,.column)  
+            do ..Conversion(.row,.column)  
         }
         
         
         write !, "Ended replacement loop"
         write *32
-        write !, "Binary boarding is now complete !."
+        write !, "Binary setup is now complete !."
 }
 
+// A method that assigns row and column numbers and then extracts the column results and converts it to decimal
 ClassMethod Conversion(ByRef column As %Binary, ByRef row As %Binary)
 {
 
@@ -57,7 +61,7 @@ ClassMethod Conversion(ByRef column As %Binary, ByRef row As %Binary)
     
     
 
-/// set up a for loop to extract the column result and convert it in to decimalised format
+    /// set up a for loop to extract the column result and convert it in to decimalised format
 
 
     set RowResult=0,Power=1
